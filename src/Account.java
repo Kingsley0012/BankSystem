@@ -4,16 +4,18 @@ public class Account {
 
     private String username;
     private double balance;
-    private String accNumber;
+    private int accNumber;
     private String password;
     private String email;
-    private String phoneNumber;
+    private int phoneNumber;
 
 
-    Account(String username, double userBalance, String accountNumber, String password, String userEmail, String phoneNumber) {
+    Account(String username, double userBalance, String password, String userEmail, int phoneNumber) {
+        int phoneNL = (String.valueOf(phoneNumber).length() - 2);
+        int accountNumber = (int) ((int) phoneNumber % Math.pow(100, phoneNL));
         this.username = username;
         balance = userBalance;
-        accNumber = accountNumber;
+        this.accNumber = accountNumber;
         this.password = password;
         email = userEmail;
         this.phoneNumber = phoneNumber;
@@ -95,7 +97,8 @@ public class Account {
                     System.out.println("change Completed");
                 } else if (userInfo.equals("3")){
                     System.out.println("What do you want to be the new user phone number.");
-                    String newPhoneNumber = input.nextLine();
+                    String nPhoneNumber = input.nextLine();
+                    int newPhoneNumber = Integer.parseInt(nPhoneNumber);
                     setPhoneNumber(newPhoneNumber);
                     System.out.println("change Completed to " + getPhoneNumber());
                 } else if (userInfo.equals("4")){
@@ -105,7 +108,8 @@ public class Account {
                     System.out.println("change Completed to "+ getEmail());
                 } else if (userInfo.equals("5")){
                     System.out.println("What do you want to be the new user account number.");
-                    String newAccountNumber = input.nextLine();
+                    String nAccountNumber = input.nextLine();
+                    int newAccountNumber = Integer.parseInt(nAccountNumber);
                     setAccNumber(newAccountNumber);
                     System.out.println("change Completed to " +  getAccNumber());
                 } else if (userInfo.equals("6")){
@@ -139,11 +143,11 @@ public class Account {
         this.balance = balance;
     }
 
-    public String getAccNumber() {
+    public int getAccNumber() {
         return accNumber;
     }
 
-    public void setAccNumber(String accNumber) {
+    public void setAccNumber(int accNumber) {
         this.accNumber = accNumber;
     }
 
@@ -163,11 +167,11 @@ public class Account {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
+    public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
