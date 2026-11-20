@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Account {
@@ -12,13 +13,21 @@ public class Account {
 
     Account(String username, double userBalance, String password, String userEmail, int phoneNumber) {
         int phoneNL = (String.valueOf(phoneNumber).length() - 2);
-        int accountNumber = (int) ((int) phoneNumber % Math.pow(100, phoneNL));
+        int accountNumber = (int) ( phoneNumber % Math.pow(100, phoneNL));
         this.username = username;
         balance = userBalance;
         this.accNumber = accountNumber;
         this.password = password;
         email = userEmail;
         this.phoneNumber = phoneNumber;
+    }
+
+    public Account() {
+
+    }
+
+    public boolean checkPassword(String pin) {
+        return Objects.equals(pin, password);
     }
 
     public void depositFunds() {
@@ -43,7 +52,7 @@ public class Account {
         while (true) {
             System.out.println("To continue input the password");
             String pin =  input.nextLine();
-            if (pin.equals(password)) {
+            if (checkPassword(pin)) {
                 System.out.println("Withdraw Funds initiated");
                 System.out.println(getUsername()+ " Total balance is: " + balance);
                 try {
@@ -57,11 +66,10 @@ public class Account {
                     if (newBalance <= balance) {
                         balance -= newBalance;
                         System.out.println("Withdrawn successful, " + getUsername() + " Current balance is: $" + balance);
-                        break;
                     } else {
                         System.out.println("Insufficient funds to make transactions");
-                        break;
                     }
+                    break;
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input");
                 }
@@ -70,10 +78,9 @@ public class Account {
             System.out.println("Wrong password");
             System.out.println("press enter to try again...");
             input.nextLine();
-            continue;
-
         }
     }
+
 
     public void editUser() {
         Scanner input = new Scanner(System.in);
@@ -81,7 +88,7 @@ public class Account {
         while (true) {
             System.out.println("To continue input the password");
             String pin = input.nextLine();
-            if (pin.equals(password)) {
+            if (checkPassword(pin)) {
                 System.out.println("What do you want to edit " + getUsername());
                 System.out.println("1.Username, 2.Password, 3. Phone Number, 4.E-mail\n5.Account number 6.EXIT");
                 String userInfo = input.nextLine();
@@ -176,3 +183,4 @@ public class Account {
     }
 
 }
+
