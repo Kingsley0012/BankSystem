@@ -1,3 +1,3 @@
-Heyy there
+# Heyy there
 
-this is my terminal base bank System built with java
+# this is a System built with java to simultaneousl
